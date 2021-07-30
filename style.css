@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+}
+.wrapper{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.board{
+    display: flex;
+    flex-flow: row wrap;
+    width: 400px;
+    height: 300px;
+    border: 2px solid #000000;
+}
+
+.board > div{
+    width: 99px;
+    height: 99px;
+    border: 1px solid #808080;
+    transition: background-color 0.75s ease-in;
+    cursor: pointer;
+    background-color: #7979e9cb;
+}
+.board > div:hover{
+    background-color: #d3d3d3;
+}
+.boardBackground{
+    background-color: #7979e9cb;
+}
+
+.matchedField{
+    background-color: #ffffff;
+}
