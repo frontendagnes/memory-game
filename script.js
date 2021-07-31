@@ -17,15 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
   boardItems.sort(() => 0.5 - Math.random());
   console.log(boardItems);
   const items = document.querySelectorAll(".board div");
+  const win = document.querySelector(".win");
   let boardId = [];
   let boardField = [];
-  // tło planszy przed rozpoczęciem gry
-  // const setColor = () => {
-  //   for (let i = 0; i < items.length; i++) {
-  //     items[i].classList.add("boardBackground")
-  //   }
-  // };
-  // setColor()
+  let fieldsWon = [];
+
+  // dodanie atryputu data-id do planszy
+  const setBoard = () => {
+    for (let i = 0; i < items.length; i++) {
+      items[i].setAttribute("data-id", i);
+    }
+  };
+  setBoard();
 
   // sprawdzenie dopasowania pól
   const matchingFields = (index) => {
@@ -34,22 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("i>>", boardId);
     console.log(boardField);
 
-    if (idOne == idTwo) {
+    if (idOne == idTwo) { // sprawdzamy czy klinelismy w to samo pole
       console.log("klikałeś w to pole");
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
-    }else if (boardField[0] === boardField[1]) {
+    } else if (boardField[0] === boardField[1]) { // trafienie
       console.log("Trafienie");
       items[idOne].style.backgroundColor = "white";
       items[idTwo].style.backgroundColor = "white";
-      items[idOne].removeEventListener("click", flipCard);
-      items[idTwo].removeEventListener("click", flipCard);
-    }else{
+      items[idOne].removeEventListener("click", () => flipCard(index));
+      items[idTwo].removeEventListener("click", () => flipCard(index));
+      fieldsWon.push(boardField);
+    } else { // brak trafienia
       console.log("Pudło");
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
-      items[idOne].removeEventListener("click", flipCard);
-      items[idTwo].removeEventListener("click", flipCard);
     }
 
     if (boardField.length === 2) {
@@ -58,23 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (boardId.length === 2) {
       boardId = [];
     }
+
+    // sparawdzmy czy gra została skończona
+    if (boardItems.length / 2 === fieldsWon.length) {
+      console.log("you win");
+      win.textContent = "You win";
+    }
   };
 
   // obrót pola
   const flipCard = (index) => {
     const backgroundField = boardItems[index];
     const indexField = items[index].getAttribute("data-id");
-    
+
     boardField.push(backgroundField);
     boardId.push(indexField);
 
     items[index].style.backgroundColor = boardItems[index];
-    items[index].setAttribute("data-id", index);
 
-    if(boardId.length === 2){
-      matchingFields(index);
+    if (boardId.length === 2) {
+      setTimeout(() => matchingFields(index), 1500);
     }
-    
   };
 
   // nasłuch na kliknięcie w pole
