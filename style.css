@@ -1,44 +1,72 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html, body{
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
-h1{
-    margin-bottom: 100px;
+h1 {
+  margin-bottom: 100px;
 }
-.wrapper{
-    height: 100%;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
 }
-.board{
-    display: flex;
-    flex-flow: row wrap;
-    width: 400px;
-    height: 300px;
-    border: 2px solid #000000;
-}
-
-.board > div{
-    width: 99px;
-    height: 99px;
-    border: 1px solid #808080;
-    transition: background-color 0.75s ease-in;
-    cursor: pointer;
-    background-color: #7979e9cb;
-}
-.board > div:hover{
-    background-color: #d3d3d3;
-}
-.boardBackground{
-    background-color: #7979e9cb;
+.board {
+  display: flex;
+  flex-flow: row wrap;
+  width: 400px;
+  height: 300px;
+  border: 2px solid #000000;
 }
 
-.matchedField{
-    background-color: #ffffff;
+.board > div {
+  width: 99px;
+  height: 99px;
+  border: 1px solid #808080;
+  transition: background-color 0.75s ease-in;
+  cursor: pointer;
+  background-color: #7979e9cb;
+}
+.board > div:hover {
+  background-color: #d3d3d3 !important;
+}
+.win {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ff0000;
+  letter-spacing: 4px;
+}
+
+.color {
+  background-color: #7979e9cb;
+}
+.settings {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.settings__reset {
+  padding: 10px 20px;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  border: 1px solid #000000;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: rgba(195, 195, 252, 0.795);
+  cursor: pointer;
+}
+.score {
+  height: 20px;
+  margin: 10px;
+  font-size: 1.2rem;
 }

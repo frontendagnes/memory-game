@@ -14,41 +14,41 @@ document.addEventListener("DOMContentLoaded", () => {
     "blue",
   ];
 
-  boardItems.sort(() => 0.5 - Math.random());
-  console.log(boardItems);
   const items = document.querySelectorAll(".board div");
   const win = document.querySelector(".win");
+  const reset = document.querySelector(".reset-js");
+  const score = document.querySelector(".score");
   let boardId = [];
   let boardField = [];
   let fieldsWon = [];
 
-  // dodanie atryputu data-id do planszy
+  // dodanie atrybutu data-id do planszy
   const setBoard = () => {
     for (let i = 0; i < items.length; i++) {
       items[i].setAttribute("data-id", i);
     }
   };
-  setBoard();
-
   // sprawdzenie dopasowania pól
-  const matchingFields = (index) => {
+  const matchingFields = () => {
     const idOne = boardId[0];
     const idTwo = boardId[1];
-    console.log("i>>", boardId);
-    console.log(boardField);
 
-    if (idOne == idTwo) { // sprawdzamy czy klinelismy w to samo pole
+    if (idOne == idTwo) {
+      // sprawdzamy czy klinelismy w to samo pole
       console.log("klikałeś w to pole");
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
-    } else if (boardField[0] === boardField[1]) { // trafienie
+    } else if (boardField[0] === boardField[1]) {
+      // trafienie
       console.log("Trafienie");
       items[idOne].style.backgroundColor = "white";
       items[idTwo].style.backgroundColor = "white";
-      items[idOne].removeEventListener("click", () => flipCard(index));
-      items[idTwo].removeEventListener("click", () => flipCard(index));
+      items[idOne].removeEventListener("click", flipCard);
+      items[idTwo].removeEventListener("click", flipCard);
       fieldsWon.push(boardField);
-    } else { // brak trafienia
+      score.textContent = `Liczba punktów: ${fieldsWon.length}`;
+    } else {
+      // brak trafienia
       console.log("Pudło");
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
@@ -69,22 +69,36 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // obrót pola
-  const flipCard = (index) => {
-    const backgroundField = boardItems[index];
-    const indexField = items[index].getAttribute("data-id");
+  function flipCard() {
+    const indexField = this.getAttribute("data-id");
+    const backgroundField = boardItems[indexField];
 
     boardField.push(backgroundField);
     boardId.push(indexField);
 
-    items[index].style.backgroundColor = boardItems[index];
+    items[indexField].style.backgroundColor = boardItems[indexField];
 
     if (boardId.length === 2) {
-      setTimeout(() => matchingFields(index), 1500);
+      setTimeout(() => matchingFields(indexField), 1500);
     }
-  };
-
-  // nasłuch na kliknięcie w pole
-  for (let i = 0; i < items.length; i++) {
-    items[i].addEventListener("click", () => flipCard(i));
   }
+
+  function resetGame() {
+    boardItems.sort(() => 0.5 - Math.random());
+    console.log(boardItems);
+    boardId = [];
+    boardField = [];
+    fieldsWon = [];
+    win.textContent = "";
+    score.textContent = "";
+    setBoard();
+    for (let i = 0; i < items.length; i++) {
+      items[i].addEventListener("click", flipCard);
+      items[i].style.backgroundColor = "#7979e9cb";
+    }
+  }
+
+  resetGame();
+  // reset ustawień gry
+  reset.addEventListener("click", resetGame);
 });
