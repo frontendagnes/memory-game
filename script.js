@@ -1,19 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // const boardItems = [
+  //   "red",
+  //   "yellow",
+  //   "green",
+  //   "purple",
+  //   "orange",
+  //   "blue",
+  //   "red",
+  //   "yellow",
+  //   "green",
+  //   "purple",
+  //   "orange",
+  //   "blue",
+  // ];
   const boardItems = [
-    "red",
-    "yellow",
-    "green",
-    "purple",
-    "orange",
-    "blue",
-    "red",
-    "yellow",
-    "green",
-    "purple",
-    "orange",
-    "blue",
+    `url('./images/emoji1.png')`,
+    `url('./images/emoji2.webp')`,
+    `url('./images/emoji3.png')`,
+    `url('./images/emoji4.png')`,
+    `url('./images/emoji5.webp')`,
+    `url('./images/emoji6.png')`,
+    `url('./images/emoji1.png')`,
+    `url('./images/emoji2.webp')`,
+    `url('./images/emoji3.png')`,
+    `url('./images/emoji4.png')`,
+    `url('./images/emoji5.webp')`,
+    `url('./images/emoji6.png')`,
   ];
-
   const items = document.querySelectorAll(".board div");
   const win = document.querySelector(".win");
   const reset = document.querySelector(".reset-js");
@@ -21,7 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let boardId = [];
   let boardField = [];
   let fieldsWon = [];
-
+items.forEach(item => {
+  item.addEventListener("click", function(){
+    item.style.background = "./images/emoji1.png"
+  })
+})
   // dodanie atrybutu data-id do planszy
   const setBoard = () => {
     for (let i = 0; i < items.length; i++) {
@@ -45,13 +62,17 @@ document.addEventListener("DOMContentLoaded", () => {
       items[idTwo].style.backgroundColor = "white";
       items[idOne].removeEventListener("click", flipCard);
       items[idTwo].removeEventListener("click", flipCard);
+      items[idOne].style.backgroundImage = `none`;
+      items[idTwo].style.backgroundImage = `none`;
       fieldsWon.push(boardField);
-      score.textContent = `Liczba punktów: ${fieldsWon.length}`;
+      score.textContent = `Score: ${fieldsWon.length}`;
     } else {
       // brak trafienia
       console.log("Pudło");
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
+      items[idOne].style.backgroundImage = `none`;
+      items[idTwo].style.backgroundImage = `none`;
     }
 
     if (boardField.length === 2) {
@@ -64,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // sparawdzmy czy gra została skończona
     if (boardItems.length / 2 === fieldsWon.length) {
       console.log("you win");
-      win.textContent = "You win";
+      win.textContent = `Cool! You found all the pairs 😁` ;
     }
   };
 
@@ -76,10 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
     boardField.push(backgroundField);
     boardId.push(indexField);
 
-    items[indexField].style.backgroundColor = boardItems[indexField];
+    items[indexField].style.backgroundImage = boardItems[indexField];
 
     if (boardId.length === 2) {
-      setTimeout(() => matchingFields(indexField), 1500);
+      setTimeout(matchingFields, 1000);
     }
   }
 
@@ -90,11 +111,12 @@ document.addEventListener("DOMContentLoaded", () => {
     boardField = [];
     fieldsWon = [];
     win.textContent = "";
-    score.textContent = "";
+    score.textContent = "Score: 0";
     setBoard();
     for (let i = 0; i < items.length; i++) {
       items[i].addEventListener("click", flipCard);
       items[i].style.backgroundColor = "#7979e9cb";
+      items[i].style.backgroundImage = `none`;
     }
   }
 
