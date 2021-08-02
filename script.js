@@ -52,12 +52,10 @@ items.forEach(item => {
 
     if (idOne == idTwo) {
       // sprawdzamy czy klinelismy w to samo pole
-      console.log("klikałeś w to pole");
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
     } else if (boardField[0] === boardField[1]) {
       // trafienie
-      console.log("Trafienie");
       items[idOne].style.backgroundColor = "white";
       items[idTwo].style.backgroundColor = "white";
       items[idOne].removeEventListener("click", flipCard);
@@ -68,7 +66,7 @@ items.forEach(item => {
       score.textContent = `Score: ${fieldsWon.length}`;
     } else {
       // brak trafienia
-      console.log("Pudło");
+
       items[idOne].style.backgroundColor = "#7979e9cb";
       items[idTwo].style.backgroundColor = "#7979e9cb";
       items[idOne].style.backgroundImage = `none`;
@@ -84,7 +82,6 @@ items.forEach(item => {
 
     // sparawdzmy czy gra została skończona
     if (boardItems.length / 2 === fieldsWon.length) {
-      console.log("you win");
       win.textContent = `Cool! You found all the pairs 😁` ;
     }
   };
@@ -104,9 +101,8 @@ items.forEach(item => {
     }
   }
 
-  function resetGame() {
+  function startGame() {
     boardItems.sort(() => 0.5 - Math.random());
-    console.log(boardItems);
     boardId = [];
     boardField = [];
     fieldsWon = [];
@@ -120,7 +116,7 @@ items.forEach(item => {
     }
   }
 
-  resetGame();
+  startGame();
   // reset ustawień gry
-  reset.addEventListener("click", resetGame);
+  reset.addEventListener("click", startGame);
 });

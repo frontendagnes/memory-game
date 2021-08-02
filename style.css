@@ -13,6 +13,8 @@ h1 {
   margin-bottom: -100px;
   font-size: 3.5rem;
   letter-spacing: 6px;
+  color:#5555ff;
+  text-shadow: 1px 0px 1px #CCCCCC, 0px 1px 1px #EEEEEE, 2px 1px 1px #CCCCCC, 1px 2px 1px #EEEEEE, 3px 2px 1px #CCCCCC, 2px 3px 1px #EEEEEE, 4px 3px 1px #CCCCCC, 3px 4px 1px #EEEEEE, 5px 4px 1px #CCCCCC, 4px 5px 1px #EEEEEE, 6px 5px 1px #CCCCCC, 5px 6px 1px #EEEEEE, 7px 6px 1px #CCCCCC;
 }
 .wrapper {
   height: 100%;
@@ -20,7 +22,9 @@ h1 {
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-
+  background-image: url('./images/background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .board {
   display: flex;
@@ -28,6 +32,12 @@ h1 {
   width: 400px;
   height: 300px;
   border: 2px solid #000000;
+  background-image: url('./images/dragon.webp');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 
 .board > div {
@@ -36,7 +46,7 @@ h1 {
   border: 1px solid #808080;
   transition: background-color 0.75s ease-in;
   cursor: pointer;
-  background-color: #7979e9cb;
+  background-color: #7979e96b;
   /* background-image: url('./images/background.webp'); */
   background-size: 100% 100%;
 }
