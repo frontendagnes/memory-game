@@ -7,7 +7,7 @@ Gra memory polega na znalezieniu 6 takich samych par w tym przypadku emoji.
 
 - Source Code: https://github.com/zabula81/memory-game
 - Issue Tracker: https://github.com/zabula81/memory-game/issues
-- View: https:///frontendagnes.github.io/memory-game/
+- View: https://frontendagnes.github.io/memory-game/
 
 ### Author
 
